@@ -50,22 +50,24 @@ namespace MCronberg.Sap.ConsoleOutput.Core
             Write(ex.ToString(), color);
         }
 
-        public void SimpleHeader(string header, ConsoleColor color = ConsoleColor.Gray)
+        public void SimpleHeader(string header, ConsoleColor color = ConsoleColor.Gray, bool addNewline = false)
         {
             var prePost = new String('-', header.Length);
-
             Write(header, color);
             Write(prePost, color);
-            NewLine();
+            if(addNewline)
+                NewLine();
         }
 
-        public void BigHeader(string header, char headerChar = '=', ConsoleColor color = ConsoleColor.Gray)
+        public void BigHeader(string header, char headerChar = '=', ConsoleColor color = ConsoleColor.Gray, bool addNewline = false)
         {
             var prePost = new String(headerChar, header.Length);
             Write(prePost, color);
             Write(header.ToUpper(), color);
             Write(prePost, color);
-            NewLine();
+            if (addNewline)
+                NewLine();
+
         }
 
         public void Json(object obj, ConsoleColor color = ConsoleColor.Gray)
