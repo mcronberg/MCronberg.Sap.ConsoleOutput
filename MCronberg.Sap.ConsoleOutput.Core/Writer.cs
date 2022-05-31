@@ -36,6 +36,12 @@ namespace MCronberg.Sap.ConsoleOutput.Core
             Write("");
 
         }
+
+        public void Clear()
+        {
+            Console.Clear();
+        }
+
         public void Write(string txt, ConsoleColor color = ConsoleColor.Gray)
         {
             ConsoleColor c = Console.ForegroundColor;
