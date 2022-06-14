@@ -62,7 +62,7 @@ namespace MCronberg.Sap.ConsoleOutput.ConsoleTest
         public static List<Test> GetTest()
         {
             List<Test> lst = new List<Test>();
-            lst.Add(new Test { A = 1, B = "a", C = "x" });
+            lst.Add(new Test { A = 1, B = "a", C = "x lsk æslkf æslkd fæslkdf sæklfj æslkj f" });
             lst.Add(new Test { A = 2, B = "b",C = null });
             lst.Add(new Test { A = 3, B = "c", C = "y" });
             return lst;

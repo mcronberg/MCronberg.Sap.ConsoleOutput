@@ -50,7 +50,7 @@
                 return ToStringTable(arrValues);
             }
 
-            public string ToStringTable(string[,] arrValues)
+            public string ToStringTable(string[,] arrValues, int stringLength = 20)
             {
                 int[] maxColumnsWidth = GetMaxColumnsWidth(arrValues);
                 int countWidth = arrValues.GetLength(0).ToString().Length;
@@ -73,7 +73,7 @@
                     for (int colIndex = 0; colIndex < arrValues.GetLength(1); colIndex++)
                     {
                         // Print cell
-                        string cell = arrValues[rowIndex, colIndex];
+                        string cell = cut(arrValues[rowIndex, colIndex], stringLength);
                         cell = cell.PadRight(maxColumnsWidth[colIndex]);
                         sb.Append(" | ");
                         sb.Append(cell);
@@ -92,16 +92,22 @@
                 }
 
                 return sb.ToString();
+
+                string cut(string tzt, int length) {
+                    if (tzt.Length < length)
+                        return tzt;
+                    return tzt.Substring(0, length - 3) + "...";
+                }
             }
 
-            private int[] GetMaxColumnsWidth(string[,] arrValues)
+            private int[] GetMaxColumnsWidth(string[,] arrValues, int stringLength = 20)
             {
                 var maxColumnsWidth = new int[arrValues.GetLength(1)];
                 for (int colIndex = 0; colIndex < arrValues.GetLength(1); colIndex++)
                 {
                     for (int rowIndex = 0; rowIndex < arrValues.GetLength(0); rowIndex++)
                     {
-                        int newLength = arrValues[rowIndex, colIndex].Length;
+                        int newLength = arrValues[rowIndex, colIndex].Length<=stringLength? arrValues[rowIndex, colIndex].Length: stringLength;
                         int oldLength = maxColumnsWidth[colIndex];
 
                         if (newLength > oldLength)
