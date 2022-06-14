@@ -28,11 +28,16 @@ namespace MCronberg.Sap.ConsoleOutput.ConsoleTest
             w.SimpleError(e);
             w.SimpleError(e, ConsoleColor.Red);
 
+
+            w.Table<Test>(Test.GetTest());
+            w.Table<Test>(Test.GetTest(), true);
             w.Table<Test>(Test.GetTest(), i => i.A, i => i.B);
             w.Table<Test>(Test.GetTest(), showCounter: true, i => i.A, i => i.B);
             List<int> lst1 = new List<int>() { 4, 5, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1 };
             w.Table(lst1, true);
+            
             w.Table(values: lst1, columnHeaders: new[] { "i" }, showCounter: true, i => i);
+
 
             if (System.IO.Directory.Exists(@"c:\temp"))
             {
@@ -43,7 +48,6 @@ namespace MCronberg.Sap.ConsoleOutput.ConsoleTest
                 w = new Writer(t => System.IO.File.AppendAllText(@"c:\temp\test.txt", t + "\r\n"), true);
                 w.BigHeader("Text to file and console");
                 w.BigHeader("Text to file and console");
-
             }
 
         }
@@ -53,13 +57,14 @@ namespace MCronberg.Sap.ConsoleOutput.ConsoleTest
     {
         public int A { get; set; }
         public string B { get; set; }
+        public string C { get; set; }
 
         public static List<Test> GetTest()
         {
             List<Test> lst = new List<Test>();
-            lst.Add(new Test { A = 1, B = "a" });
-            lst.Add(new Test { A = 2, B = "b" });
-            lst.Add(new Test { A = 3, B = "c" });
+            lst.Add(new Test { A = 1, B = "a", C = "x" });
+            lst.Add(new Test { A = 2, B = "b",C = null });
+            lst.Add(new Test { A = 3, B = "c", C = "y" });
             return lst;
         }
     }
